@@ -35,6 +35,7 @@ ul {
 }
 body {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
+  background: #f4f4f4;
   color: #345;
 }
 a {

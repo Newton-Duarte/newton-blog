@@ -1,16 +1,34 @@
 <template>
   <div id="home" class="home">
-    <CardPost />
+    <AddPost />
+    <CardPost
+      v-for="(post) of posts"
+      :key="post.id + post.title"
+      :title="post.title"
+      :body="post.body"
+    />
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import CardPost from '@/components/CardPost';
+import AddPost from '@/components/AddPost';
 
 export default {
   name: "Home",
   components: {
-    CardPost
+    CardPost,
+    AddPost
+  },
+  computed: {
+    ...mapGetters(['posts'])
+  },
+  methods: {
+    ...mapActions(['fetchPosts'])
+  },
+  created() {
+    this.fetchPosts();
   }
 };
 </script>

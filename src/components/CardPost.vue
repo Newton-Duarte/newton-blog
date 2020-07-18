@@ -2,15 +2,14 @@
   <div class="card">
     <div class="card-header">
       <div>
-        <p class="author">{{ author }}</p>
-        <span class="time">{{ time }}</span>
+        <p class="title">{{ title }}</p>
       </div>
       <div class="card-actions">
         <button>Acao</button>
       </div>
     </div>
     <div class="card-body">
-      {{ content }}
+      {{ body }}
     </div>
     <div class="card-comment">
       <button>Comentar</button>
@@ -22,15 +21,11 @@
 export default {
   name: 'CardPost',
   props: {
-    author: {
+    title: {
       type: String,
-      default: 'Author of Post'
+      default: 'Title of Post'
     },
-    time: {
-      type: String,
-      default: '1h (time of post)'
-    },
-    content: {
+    body: {
       type: String,
       default: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus iste minima repellendus repudiandae nulla ad ex est delectus culpa vel aspernatur, maxime odio ut perspiciatis!'
     }
@@ -41,12 +36,14 @@ export default {
 <style scoped>
 .card {
   padding: 15px;
-  border: 2px solid rgba(30, 60, 90, .1);
+  margin: 10px auto;
+  background: white;
+  box-shadow: var(--main-box-shadow);
   border-radius: 4px;
   width: 600px;
   max-width: 100%;
 }
-.card .author {
+.card .title {
   font-weight: bold;
   color: #050505;
 }
