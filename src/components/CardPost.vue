@@ -1,18 +1,16 @@
 <template>
-  <div class="card">
+  <div class="card" :id="id">
     <div class="card-header">
-      <div>
+      <div class="card-title">
         <p class="title">{{ title }}</p>
       </div>
       <div class="card-actions">
-        <button>Acao</button>
+        <button @click="$emit('edit')">Edit</button>
+        <button @click="$emit('remove')">Delete</button>
       </div>
     </div>
     <div class="card-body">
       {{ body }}
-    </div>
-    <div class="card-comment">
-      <button>Comentar</button>
     </div>
   </div>
 </template>
@@ -21,6 +19,9 @@
 export default {
   name: 'CardPost',
   props: {
+    id: {
+      default: null
+    },
     title: {
       type: String,
       default: 'Title of Post'
@@ -43,6 +44,9 @@ export default {
   width: 600px;
   max-width: 100%;
 }
+.card-title {
+  width: 80%;
+}
 .card .title {
   font-weight: bold;
   color: #050505;
@@ -58,8 +62,25 @@ export default {
   margin-bottom: 10px;
 }
 .card-body {
-  font-size: 1.125rem;
+  font-size: .9rem;
   color: #050505;
   margin-bottom: 10px;
+}
+.card-actions {
+  width: 20%;
+  text-align: end;
+}
+.card-actions button {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+.card-actions button:focus {
+  border: none;
+}
+@media (max-width: 800px) {
+  .card-actions button {
+    margin: 5px 0;
+  }
 }
 </style>

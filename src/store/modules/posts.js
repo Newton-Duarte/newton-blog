@@ -34,11 +34,13 @@ const actions = {
     }
   },
   async deletePost({ commit }, id) {
-    try {
-      await api.delete(`/posts/${id}`);
-      commit('DELETE_POST', id);
-    } catch (error) {
-      console.log(error);
+    if (confirm('Are you sure?')) {
+      try {
+        await api.delete(`/posts/${id}`);
+        commit('DELETE_POST', id);
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 };

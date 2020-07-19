@@ -1,12 +1,29 @@
 <template>
   <div id="home" class="home">
-    <AddPost />
-    <CardPost
-      v-for="(post) of posts"
-      :key="post.id + post.title"
-      :title="post.title"
-      :body="post.body"
+    <div class="add">
+      <button
+        class="btn"
+        @click="modal = true"
+      >Add Post</button>
+    </div>
+    <AddPost
+      :modal="modal"
+      :editPost="editPost"
+      @close="closeEditPost"
     />
+    <transition-group tag="ul">
+      <li
+        v-for="(post) of posts"
+        :key="post.id + post.title"
+      >
+        <CardPost
+          :title="post.title"
+          :body="post.body"
+          @edit="openEditPost(post)"
+          @remove="deletePost(post.id)"
+        />
+      </li>
+    </transition-group>
   </div>
 </template>
 
@@ -17,6 +34,10 @@ import AddPost from '@/components/AddPost';
 
 export default {
   name: "Home",
+  data: () => ({
+    modal: false,
+    editPost: null
+  }),
   components: {
     CardPost,
     AddPost
@@ -25,7 +46,15 @@ export default {
     ...mapGetters(['posts'])
   },
   methods: {
-    ...mapActions(['fetchPosts'])
+    ...mapActions(['fetchPosts', 'deletePost']),
+    openEditPost(post) {
+      this.editPost = { ...post };
+      this.modal = true;
+    },
+    closeEditPost() {
+      this.editPost = null;
+      this.modal = false;
+    }
   },
   created() {
     this.fetchPosts();
@@ -47,5 +76,11 @@ export default {
 }
 #home h1 {
   text-align: center;
+}
+.add {
+  width: 600px;
+  max-width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
 </style>
