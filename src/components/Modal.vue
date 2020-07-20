@@ -56,7 +56,7 @@ export default {
 
 @media (max-width: 800px) {
   .modal {
-    padding: 80px 20px;
+    padding: 20px;
   }
 }
 
@@ -73,7 +73,8 @@ export default {
 
 .modal_fechar {
   border-radius: 50%;
-  border: 2px solid #000;
+  border: 2px solid #65d;
+  color: #65d;
   width: 40px;
   height: 40px;
   position: absolute;
@@ -82,20 +83,5 @@ export default {
   font-size: 1rem;
   box-shadow: 0px 3px 4px rgba(0, 0, 0, .1), 0px 4px 10px rgba(0, 0, 0, .2);
   cursor: pointer;
-}
-
-.modal_titulo {
-  font-size: 3rem;
-}
-
-.modal_btn {
-  margin-top: 80px;
-  background: #000;
-  cursor: pointer;
-  color: #fff;
-  border: none;
-  font-size: 1rem;
-  padding: 10px 25px;
-  font-family: "Noto Serif";
 }
 </style>

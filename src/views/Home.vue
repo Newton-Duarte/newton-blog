@@ -1,6 +1,7 @@
 <template>
   <div id="home" class="home">
     <div class="add">
+      <SearchBox @search="term = $event" />
       <button
         class="btn"
         @click="modal = true"
@@ -11,9 +12,9 @@
       :editPost="editPost"
       @close="closeEditPost"
     />
-    <transition-group tag="ul">
+    <transition-group v-if="computedPosts.length" tag="ul" style="width: 100%;">
       <li
-        v-for="(post) of posts"
+        v-for="(post) of computedPosts"
         :key="post.id + post.title"
       >
         <CardPost
@@ -24,6 +25,9 @@
         />
       </li>
     </transition-group>
+    <p v-else class="no-posts">
+      Your search - <span class="search-term">{{ term }}</span> - did not match any posts.
+    </p>
   </div>
 </template>
 
@@ -31,19 +35,25 @@
 import { mapGetters, mapActions } from 'vuex';
 import CardPost from '@/components/CardPost';
 import AddPost from '@/components/AddPost';
+import SearchBox from '@/components/SearchBox';
 
 export default {
   name: "Home",
   data: () => ({
     modal: false,
-    editPost: null
+    editPost: null,
+    term: ''
   }),
   components: {
     CardPost,
-    AddPost
+    AddPost,
+    SearchBox
   },
   computed: {
-    ...mapGetters(['posts'])
+    ...mapGetters(['posts']),
+    computedPosts() {
+      return this.posts.filter(post => post.title.includes(this.term) || post.body.includes(this.term));
+    },
   },
   methods: {
     ...mapActions(['fetchPosts', 'deletePost']),
@@ -82,5 +92,30 @@ export default {
   max-width: 100%;
   display: flex;
   justify-content: flex-end;
+}
+.add :first-child {
+  flex: 5;
+  margin-right: 20px;
+}
+@media (max-width: 800px) {
+  .add :first-child {
+    flex: 2;
+    margin-right: 10px;
+  }
+}
+.add :last-child {
+  flex: 1;
+}
+.no-posts {
+  background: #fff;
+  width: 600px;
+  max-width: 100%;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+}
+.search-term {
+  color: #65d;
+  font-weight: bold;
 }
 </style>

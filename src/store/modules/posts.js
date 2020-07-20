@@ -9,7 +9,9 @@ const getters = {
 };
 
 const actions = {
-  async fetchPosts({ commit }) {
+  async fetchPosts({ state, commit }) {
+    if (state.posts.length) return;
+    
     try {
       const response = await api.get('/posts');
       commit('SET_POSTS', response.data);

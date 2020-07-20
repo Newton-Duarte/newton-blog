@@ -17,6 +17,9 @@ export default {
 </script>
 
 <style scoped>
+header {
+  background: white;
+}
 nav {
   display: flex;
   align-items: center;

@@ -60,6 +60,28 @@ img {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   cursor: pointer;
 }
+@media (max-width: 800px) {
+  .btn {
+    padding: 10px 15px;
+  }
+}
+.btn-outline {
+  display: block;
+  padding: 10px 30px;
+  background: #fff;
+  border-radius: 4px;
+  color: #65d;
+  text-align: center;
+  font-size: 1rem;
+  border: 1px solid #65d;
+  transition: all .3s;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  cursor: pointer;
+}
+.btn-outline:hover {
+  background: #65d;
+  color: #fff;
+}
 .btn:hover {
   background: #65d;
   transform: scale(1.1);

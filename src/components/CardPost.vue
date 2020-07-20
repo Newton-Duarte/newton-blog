@@ -44,6 +44,11 @@ export default {
   width: 600px;
   max-width: 100%;
 }
+@media (max-width: 800px) {
+  .card {
+    width: 100%;
+  }
+}
 .card-title {
   width: 80%;
 }
